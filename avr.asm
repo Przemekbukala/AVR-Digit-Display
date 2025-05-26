@@ -9,18 +9,18 @@ seven_segment: .DB 0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x6f, 0
 prog_start:
     ldi R16, 0xff
     out DDRD, R16
-    OUT PORTD, R16
+    out PORTD, R16
     ldi R16, 0x0f
     out DDRB, R16
-    OUT PORTB, R16
-    ldi r16, 0b00001110
-    out portb, r16
-    ldi R28, 0
-    ldi R29, 0
-    ldi r16, 1
-    mov r1, r16
-    ldi r16, 0
-    mov r0, r16
+    out PORTB, R16
+    ldi r16, 0x0e
+    out PORTB, r16
+    clr r28
+    clr r29
+    ldi r16, 0x01
+    mov r1, r16    ;po co używać r0 i r1, skoro dostępne są r17 i r18 i można je załadować za pomocą ldi?
+    clr r16
+    mov r0, r16    ;tak samo tutaj
 LOOP:
     ldi r20, 50
 LOOP5:
@@ -65,7 +65,7 @@ LOOP5:
     brne LOOP5
     clc
     add r28, r1
-    adc r29, r0
+    adc r29, r0        ;r0 jest stałe i równe 0, więc dodawanie jest bezużyteczne
 JMP LOOP
 
 ; r16
